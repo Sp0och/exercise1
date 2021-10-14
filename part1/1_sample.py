@@ -16,7 +16,7 @@ from scipy.ndimage.filters import gaussian_filter
 import matplotlib.pyplot as plt
 
 # Helper functions.
-#test
+
 
 def parse_args():
     """
