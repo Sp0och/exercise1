@@ -41,10 +41,18 @@ if rot_angle != 0:
 # TODO: Implement Harris corners
 # Useful functions: gaussian_filter1d, gaussian_filter
 
-I_x = ...
-I_y = ...
-A = ...
-H = ...
+I_x = gaussian_filter1d(im,sigma_d,-1,1)
+I_y = gaussian_filter1d(im,sigma_d,0,1)
+I_x2 = np.matmul(I_x,I_x)
+I_y2 = np.matmul(I_y,I_y)
+I_xy = np.matmul(I_x,I_y)
+
+I_x2_s = gaussian_filter(im,sigma_w)
+I_y2_s = gaussian_filter(im,sigma_w)
+I_xy_s = gaussian_filter(I_xy,sigma_w)
+
+A = [[I_x2_s,I_xy_s],[I_xy_s,I_y2_s]]
+H = np.linalg.det(A) - kappa*np.trace(A)
 corn = nonmax_suppression(H,thresh,2)
 
 
